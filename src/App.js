@@ -1,5 +1,5 @@
 import "./App.scss";
-import StepCard from "./components/StepCard";
+import GameSteps from "./components/GameSteps";
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
@@ -15,7 +15,7 @@ function App() {
           </Typography>
         </Box>
         <Grid container spacing={5}>
-          <StepCard />
+          <GameSteps />
         </Grid>
       </Container>
     </div>

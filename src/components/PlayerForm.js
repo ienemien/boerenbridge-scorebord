@@ -1,6 +1,8 @@
 import AddIcon from "@mui/icons-material/Add";
+import DeleteIcon from "@mui/icons-material/Delete";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
+import IconButton from "@mui/material/IconButton";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
 import React from "react";
@@ -12,6 +14,7 @@ export default class PlayerForm extends React.Component {
 
     this.handleChange = this.handleChange.bind(this);
     this.addPlayer = this.addPlayer.bind(this);
+    this.handleSave = this.handleSave.bind(this);
   }
 
   handleChange(event) {
@@ -34,12 +37,45 @@ export default class PlayerForm extends React.Component {
     });
   }
 
+  deletePlayer(id) {
+    this.setState({
+      players: this.state.players.filter((player) => player.id !== id),
+    });
+  }
+
+  async handleSave() {
+    if (this.state.newPlayer.length > 0) {
+      await this.addPlayer();
+    }
+
+    if (this.state.players.length < 3) {
+      alert("Voeg ten minste 3 spelers toe");
+    } else if (this.state.players.length > 8) {
+      alert("Te veel spelers, voeg maximaal 8 spelers toe");
+    }
+    this.props.onSave(this.state.players);
+  }
+
   render() {
-    const players = this.state.players.map((player) => <li key={player.id}>{player.name}</li>);
+    const players = this.state.players.map((player) => (
+      <li key={player.id}>
+        {player.name}{" "}
+        <IconButton
+          aria-label="delete"
+          size="small"
+          onClick={() => this.deletePlayer(player.id)}
+        >
+          <DeleteIcon fontSize="inherit" />
+        </IconButton>
+      </li>
+    ));
     return (
       <Box className="add-players">
-        <Typography gutterBottom variant="h5" component="div">
+        <Typography gutterBottom variant="h5" component="h5">
           Spelers
+        </Typography>
+        <Typography gutterBottom component="p">
+          Voeg minimaal 3 en maximaal 8 spelers toe.
         </Typography>
         <ol>{players}</ol>
         <form className="player-form">
@@ -57,7 +93,9 @@ export default class PlayerForm extends React.Component {
           >
             Voeg speler toe
           </Button>
-          <Button variant="contained">Start spel</Button>
+          <Button variant="contained" onClick={this.handleSave}>
+            Start spel
+          </Button>
         </form>
       </Box>
     );
