@@ -17,15 +17,27 @@ export default class ChooseTricksForm extends React.Component {
   }
 
   handleChange(event, playerId) {
+    if (!this.chosenTricksValid(event.target.value, playerId)) {
+      alert(
+        "Totaal van gekozen slagen mag niet gelijk zijn aan aantal kaarten"
+      );
+      return;
+    }
     this.setState({
-      chosenTricks: this.state.chosenTricks.concat({
-        playerId,
-        value: event.target.value,
-      }),
+      chosenTricks: this.state.chosenTricks
+        .filter((trick) => trick.playerId !== playerId)
+        .concat({
+          playerId,
+          value: event.target.value,
+        }),
     });
   }
 
   async handleSave() {
+    if (this.state.chosenTricks.length !== this.props.players.length) {
+      alert("Nog niet alle spelers hebben hun slagen gekozen");
+      return;
+    }
     this.props.onSave(this.state.chosenTricks);
   }
 
@@ -34,6 +46,22 @@ export default class ChooseTricksForm extends React.Component {
       (trick) => trick.playerId === player.id
     );
     return trick ? trick.value : "";
+  }
+
+  chosenTricksValid(value, playerId) {
+    const allOtherPlayersHaveChosen =
+      this.props.players.length === this.state.chosenTricks.length ||
+      this.props.players.length - 1 === this.state.chosenTricks.length;
+    if (playerId === this.props.step.dealerId && allOtherPlayersHaveChosen) {
+      const totalChosen = this.state.chosenTricks
+        .filter((trick) => trick.playerId !== playerId)
+        .map((trick) => trick.value)
+        .reduce((prev, cur) => prev + cur);
+      if (totalChosen + value === this.props.step.nrOfCards) {
+        return false;
+      }
+    }
+    return true;
   }
 
   render() {
@@ -67,7 +95,8 @@ export default class ChooseTricksForm extends React.Component {
     return (
       <Box>
         <Typography gutterBottom variant="h5" component="h5">
-          Kies aantal slagen per speler
+          {"Kies aantal slagen per speler, aantal kaarten voor deze ronde: " +
+            this.props.step.nrOfCards}
         </Typography>
         <form>{tricks}</form>
         <Button variant="contained" onClick={this.handleSave}>

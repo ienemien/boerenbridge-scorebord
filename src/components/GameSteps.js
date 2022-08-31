@@ -30,9 +30,12 @@ export default class GameSteps extends React.Component {
     this.setSteps(players.length);
   }
 
-  saveChosenTricks(tricks) {
+  saveChosenTricks(stepId, tricks) {
+    const steps = this.state.steps.slice();
+    const step = steps.find((step) => stepId === step.id);
+    step.chosenTricks = tricks;
     this.setState({
-      chosenTricks: tricks,
+      steps: steps,
     });
   }
 
@@ -92,7 +95,7 @@ export default class GameSteps extends React.Component {
           <ChooseTricksForm
             players={this.state.players}
             step={step}
-            onSave={(tricks) => this.saveChosenTricks(tricks)}
+            onSave={(tricks) => this.saveChosenTricks(step.id, tricks)}
           ></ChooseTricksForm>
         );
       } else {
