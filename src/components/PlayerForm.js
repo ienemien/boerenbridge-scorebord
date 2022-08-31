@@ -52,8 +52,9 @@ export default class PlayerForm extends React.Component {
       alert("Voeg ten minste 3 spelers toe");
     } else if (this.state.players.length > 8) {
       alert("Te veel spelers, voeg maximaal 8 spelers toe");
+    } else {
+      this.props.onSave(this.state.players);
     }
-    this.props.onSave(this.state.players);
   }
 
   render() {

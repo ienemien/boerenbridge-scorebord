@@ -1,13 +1,13 @@
 .add-players {
   padding: 10px;
+}
 
-  .player-form {
-    display: flex;
-    flex-direction: column;
+form {
+  display: flex;
+  flex-direction: column;
 
-    div,
-    button {
-      margin-bottom: 5px;
-    }
+  div,
+  button {
+    margin-bottom: 10px;
   }
 }
