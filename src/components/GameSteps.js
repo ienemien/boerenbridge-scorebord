@@ -1,9 +1,11 @@
-import PlayerForm from "./PlayerForm";
-import ChooseTricksForm from "./ChooseTricksForm";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Grid from "@mui/material/Grid";
 import React from "react";
+import ActualTricksForm from "./ActualTricksForm";
+import ChooseTricksForm from "./ChooseTricksForm";
+import PlayerForm from "./PlayerForm";
+import Scoreboard from "./Scoreboard";
 
 export default class GameSteps extends React.Component {
   constructor(props) {
@@ -15,6 +17,8 @@ export default class GameSteps extends React.Component {
     };
     this.savePlayers = this.savePlayers.bind(this);
     this.saveChosenTricks = this.saveChosenTricks.bind(this);
+    this.saveScore = this.saveScore.bind(this);
+    this.nextStep = this.nextStep.bind(this);
   }
 
   nextStep() {
@@ -33,10 +37,53 @@ export default class GameSteps extends React.Component {
   saveChosenTricks(stepId, tricks) {
     const steps = this.state.steps.slice();
     const step = steps.find((step) => stepId === step.id);
-    step.chosenTricks = tricks;
+    step.scores = tricks.map((trick) => ({
+      playerId: trick.playerId,
+      chosenTricks: trick.value,
+    }));
     this.setState({
       steps: steps,
     });
+  }
+
+  saveScore(stepId, tricks) {
+    const step = this.state.steps.find((step) => stepId === step.id);
+    const prevStep = this.state.steps.find((step) => stepId === step.id - 1);
+    let scores = step.scores.slice();
+    scores = tricks.map((trick) => {
+      const score = step.scores.find(
+        (score) => trick.playerId === score.playerId
+      );
+      const actualTricks = trick.value;
+      const added = this.calculateAddedScore(score.chosenTricks, actualTricks);
+      return {
+        ...score,
+        actualTricks,
+        added,
+        total: this.calculateTotal(prevStep, trick, added),
+      };
+    });
+
+    const newSteps = this.state.steps.slice();
+    const newStepState = newSteps.find((step) => step.id === stepId);
+    newStepState.scores = scores;
+    this.setState({
+      steps: newSteps,
+    });
+  }
+
+  calculateAddedScore(chosenTricks, actualTricks) {
+    return chosenTricks === actualTricks ? 5 + actualTricks : actualTricks;
+  }
+
+  calculateTotal(prevStep, trick, added) {
+    debugger;
+    // todo: fix berekenen van totaal, gaat niet goed bij stap 2
+    const prevScore = prevStep.scores.find(
+      (score) => score.playerId === trick.playerId
+    );
+
+    return prevScore ? prevScore.total + added : added;
   }
 
   async setSteps(nrOfPlayers) {
@@ -50,8 +97,7 @@ export default class GameSteps extends React.Component {
         id,
         nrOfCards: i,
         dealerId: this.state.players[dealerIndex].id,
-        chosenTricks: [],
-        score: [],
+        scores: [],
       });
       id++;
       dealerIndex = this.getDealerIndex(dealerIndex);
@@ -61,8 +107,7 @@ export default class GameSteps extends React.Component {
         id,
         nrOfCards: i,
         dealerId: this.state.players[dealerIndex].id,
-        chosenTricks: [],
-        score: [],
+        scores: [],
       });
       id++;
       dealerIndex = this.getDealerIndex(dealerIndex);
@@ -90,7 +135,7 @@ export default class GameSteps extends React.Component {
       const step = this.state.steps.find(
         (step) => step.id === this.state.currentStep
       );
-      if (step.chosenTricks.length < 1) {
+      if (step.scores.length === 0) {
         return (
           <ChooseTricksForm
             players={this.state.players}
@@ -98,8 +143,26 @@ export default class GameSteps extends React.Component {
             onSave={(tricks) => this.saveChosenTricks(step.id, tricks)}
           ></ChooseTricksForm>
         );
+      } else if (
+        step.scores.length > 0 &&
+        step.scores[0].chosenTricks &&
+        !step.scores[0].actualTricks
+      ) {
+        return (
+          <ActualTricksForm
+            players={this.state.players}
+            step={step}
+            onSave={(tricks) => this.saveScore(step.id, tricks)}
+          ></ActualTricksForm>
+        );
       } else {
-        // voer gehaalde slagen in en toon scorebord
+        return (
+          <Scoreboard
+            players={this.state.players}
+            scores={step.scores}
+            onClick={this.nextStep}
+          ></Scoreboard>
+        );
       }
     }
   }

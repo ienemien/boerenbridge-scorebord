@@ -1,3 +1,4 @@
+import StyleIcon from "@mui/icons-material/Style";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import FormControl from "@mui/material/FormControl";
@@ -6,26 +7,29 @@ import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
 import Typography from "@mui/material/Typography";
 import React from "react";
-import StyleIcon from "@mui/icons-material/Style";
 
-export default class ChooseTricksForm extends React.Component {
+export default class ActualTricksForm extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { chosenTricks: [] };
+    this.state = { actualTricks: [] };
 
     this.handleSave = this.handleSave.bind(this);
     this.handleChange = this.handleChange.bind(this);
   }
 
   handleChange(event, playerId) {
-    if (!this.chosenTricksValid(event.target.value, playerId)) {
+    const total = this.state.actualTricks
+      .filter((trick) => trick.playerId !== playerId)
+      .map((trick) => trick.value)
+      .reduce((prev, cur) => prev + cur, 0);
+    if (total + event.target.value > this.props.step.nrOfCards) {
       alert(
-        "Totaal van gekozen slagen mag niet gelijk zijn aan aantal kaarten"
+        "Het totaal aantal behaalde slagen is hoger dan het aantal kaarten."
       );
-      return;
     }
+
     this.setState({
-      chosenTricks: this.state.chosenTricks
+      actualTricks: this.state.actualTricks
         .filter((trick) => trick.playerId !== playerId)
         .concat({
           playerId,
@@ -35,34 +39,33 @@ export default class ChooseTricksForm extends React.Component {
   }
 
   async handleSave() {
-    if (this.state.chosenTricks.length !== this.props.players.length) {
-      alert("Nog niet alle spelers hebben hun slagen gekozen");
+    if (this.state.actualTricks.length !== this.props.players.length) {
+      alert("Er is nog niet voor alle spelers de behaalde slagen ingevoerd.");
       return;
     }
-    this.props.onSave(this.state.chosenTricks);
+    const total = this.state.actualTricks
+      .map((trick) => trick.value)
+      .reduce((prev, cur) => prev + cur, 0);
+    if (total > this.props.step.nrOfCards) {
+      alert(
+        "Het totaal aantal behaalde slagen is hoger dan het aantal kaarten."
+      );
+      return;
+    }
+    if (total < this.props.step.nrOfCards) {
+      alert(
+        "Het totaal aantal behaalde slagen is lager dan het aantal kaarten."
+      );
+      return;
+    }
+    this.props.onSave(this.state.actualTricks);
   }
 
   getValue(player) {
-    const trick = this.state.chosenTricks.find(
+    const trick = this.state.actualTricks.find(
       (trick) => trick.playerId === player.id
     );
     return trick ? trick.value : "";
-  }
-
-  chosenTricksValid(value, playerId) {
-    const allOtherPlayersHaveChosen =
-      this.props.players.length === this.state.chosenTricks.length ||
-      this.props.players.length - 1 === this.state.chosenTricks.length;
-    if (playerId === this.props.step.dealerId && allOtherPlayersHaveChosen) {
-      const totalChosen = this.state.chosenTricks
-        .filter((trick) => trick.playerId !== playerId)
-        .map((trick) => trick.value)
-        .reduce((prev, cur) => prev + cur);
-      if (totalChosen + value === this.props.step.nrOfCards) {
-        return false;
-      }
-    }
-    return true;
   }
 
   render() {
@@ -78,13 +81,13 @@ export default class ChooseTricksForm extends React.Component {
 
     const tricks = this.props.players.map((player) => (
       <FormControl fullWidth key={player.id}>
-        <InputLabel id={"choose-tricks-label-" + player.id}>
+        <InputLabel id={"actual-tricks-label-" + player.id}>
           {player.name}{" "}
           {player.id === this.props.step.dealerId && <StyleIcon></StyleIcon>}
         </InputLabel>
         <Select
-          labelId={"choose-tricks-label-" + player.id}
-          id={"choose-tricks" + player.id}
+          labelId={"actual-tricks-label-" + player.id}
+          id={"actual-tricks" + player.id}
           label="Aantal slagen"
           value={this.getValue(player)}
           onChange={(event) => this.handleChange(event, player.id)}
@@ -96,15 +99,12 @@ export default class ChooseTricksForm extends React.Component {
     return (
       <Box>
         <Typography gutterBottom variant="h4" component="h4">
-          {"Ronde: " + this.props.step.id}
-        </Typography>
-        <Typography gutterBottom variant="h6" component="p">
-          {"Kies aantal slagen per speler, aantal kaarten voor deze ronde: " +
-            this.props.step.nrOfCards}
+          Vul aantal behaalde slagen in per speler voor ronde:{" "}
+          {this.props.step.id}
         </Typography>
         <form>{tricks}</form>
         <Button variant="contained" onClick={this.handleSave}>
-          Start ronde
+          Bekijk tussenstand
         </Button>
       </Box>
     );
