@@ -94,7 +94,7 @@ export default class ChooseTricksForm extends React.Component {
       </FormControl>
     ));
     return (
-      <Box>
+      <Box className="choose-tricks">
         <Typography gutterBottom variant="h4" component="h4">
           {"Ronde: " + this.props.step.id}
         </Typography>

@@ -143,23 +143,23 @@ export default class GameSteps extends React.Component {
         );
       } else if (
         step.scores.length > 0 &&
-        step.scores[0].chosenTricks &&
-        !step.scores[0].actualTricks
+        typeof step.scores[0].chosenTricks !== "undefined" &&
+        typeof step.scores[0].actualTricks !== "undefined"
       ) {
-        return (
-          <ActualTricksForm
-            players={this.state.players}
-            step={step}
-            onSave={(tricks) => this.saveScore(step.id, tricks)}
-          ></ActualTricksForm>
-        );
-      } else {
         return (
           <Scoreboard
             players={this.state.players}
             scores={step.scores}
             onClick={this.nextStep}
           ></Scoreboard>
+        );
+      } else {
+        return (
+          <ActualTricksForm
+            players={this.state.players}
+            step={step}
+            onSave={(tricks) => this.saveScore(step.id, tricks)}
+          ></ActualTricksForm>
         );
       }
     }

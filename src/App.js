@@ -10,7 +10,7 @@ function App() {
     <div>
       <Container>
         <Box paddingY={1}>
-          <Typography variant="h1" component="h1" gutterBottom>
+          <Typography variant="h3" component="h3" gutterBottom>
             Boerenbridge Scorebord
           </Typography>
         </Box>

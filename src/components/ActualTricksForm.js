@@ -97,7 +97,7 @@ export default class ActualTricksForm extends React.Component {
       </FormControl>
     ));
     return (
-      <Box>
+      <Box className="actual-tricks">
         <Typography gutterBottom variant="h4" component="h4">
           Vul aantal behaalde slagen in per speler voor ronde:{" "}
           {this.props.step.id}
