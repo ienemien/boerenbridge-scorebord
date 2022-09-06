@@ -48,7 +48,7 @@ export default class GameSteps extends React.Component {
 
   saveScore(stepId, tricks) {
     const step = this.state.steps.find((step) => stepId === step.id);
-    const prevStep = this.state.steps.find((step) => stepId === step.id - 1);
+    const prevStep = this.state.steps.find((step) => step.id === stepId - 1);
     let scores = step.scores.slice();
     scores = tricks.map((trick) => {
       const score = step.scores.find(
@@ -77,9 +77,7 @@ export default class GameSteps extends React.Component {
   }
 
   calculateTotal(prevStep, trick, added) {
-    debugger;
-    // todo: fix berekenen van totaal, gaat niet goed bij stap 2
-    const prevScore = prevStep.scores.find(
+    const prevScore = prevStep?.scores.find(
       (score) => score.playerId === trick.playerId
     );
 
