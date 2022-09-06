@@ -1,6 +1,7 @@
 .add-players,
 .actual-tricks,
-.choose-tricks {
+.choose-tricks,
+.scoreboard {
   padding: 10px;
 
   form {
@@ -10,6 +11,6 @@
 
   div,
   button {
-    margin-bottom: 10px;
+    margin: 5px 0;
   }
 }

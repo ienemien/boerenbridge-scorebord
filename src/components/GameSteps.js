@@ -168,7 +168,7 @@ export default class GameSteps extends React.Component {
   render() {
     const step = this.renderStep();
     return (
-      <Grid item xs={10}>
+      <Grid item xs={12}>
         <Card>
           <CardContent>{step}</CardContent>
         </Card>
