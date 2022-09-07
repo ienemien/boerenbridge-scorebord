@@ -13,8 +13,8 @@ export default class PlayerForm extends React.Component {
     this.state = { players: [], newPlayer: "" };
 
     this.handleChange = this.handleChange.bind(this);
-    this.addPlayer = this.addPlayer.bind(this);
     this.handleSave = this.handleSave.bind(this);
+    this.addPlayer = this.addPlayer.bind(this);
   }
 
   handleChange(event) {
@@ -22,19 +22,21 @@ export default class PlayerForm extends React.Component {
   }
 
   addPlayer() {
-    const player = this.state.players.concat([
-      {
-        id:
-          this.state.players.length > 0
-            ? this.state.players[this.state.players.length - 1].id + 1
-            : 1,
-        name: this.state.newPlayer,
-      },
-    ]);
+    const players = this.state.players.concat([this.createNewPlayer()]);
     this.setState({
-      players: player,
+      players,
       newPlayer: "",
     });
+  }
+
+  createNewPlayer() {
+    return {
+      id:
+        this.state.players.length > 0
+          ? this.state.players[this.state.players.length - 1].id + 1
+          : 1,
+      name: this.state.newPlayer,
+    };
   }
 
   deletePlayer(id) {
@@ -43,17 +45,17 @@ export default class PlayerForm extends React.Component {
     });
   }
 
-  async handleSave() {
+  handleSave() {
+    const currentPlayers = this.state.players.concat();
     if (this.state.newPlayer.length > 0) {
-      await this.addPlayer();
+      currentPlayers.push(this.createNewPlayer());
     }
-
-    if (this.state.players.length < 3) {
+    if (currentPlayers.length < 3) {
       alert("Voeg ten minste 3 spelers toe");
-    } else if (this.state.players.length > 8) {
+    } else if (currentPlayers.length > 8) {
       alert("Te veel spelers, voeg maximaal 8 spelers toe");
     } else {
-      this.props.onSave(this.state.players);
+      this.props.onSave(currentPlayers);
     }
   }
 

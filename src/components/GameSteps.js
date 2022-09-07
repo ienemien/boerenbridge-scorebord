@@ -27,11 +27,13 @@ export default class GameSteps extends React.Component {
     });
   }
 
-  async savePlayers(players) {
-    await this.setState({
-      players: players,
-    });
-    this.setSteps(players.length);
+  savePlayers(players) {
+    this.setState(
+      {
+        players: players,
+      },
+      () => this.setSteps(players.length)
+    );
   }
 
   saveChosenTricks(stepId, tricks) {
@@ -84,7 +86,7 @@ export default class GameSteps extends React.Component {
     return prevScore ? prevScore.total + added : added;
   }
 
-  async setSteps(nrOfPlayers) {
+  setSteps(nrOfPlayers) {
     const cardsPerPlayer = Math.floor(52 / nrOfPlayers);
     const maxCards = cardsPerPlayer > 10 ? 10 : cardsPerPlayer;
     const steps = [];
@@ -111,11 +113,12 @@ export default class GameSteps extends React.Component {
       dealerIndex = this.getDealerIndex(dealerIndex);
     }
 
-    await this.setState({
-      steps,
-    });
-
-    this.nextStep();
+    this.setState(
+      {
+        steps,
+      },
+      () => this.nextStep()
+    );
   }
 
   getDealerIndex(dealerIndex) {
