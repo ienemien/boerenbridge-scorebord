@@ -28,14 +28,14 @@ export default class ActualTricksForm extends React.Component {
       );
     }
 
-    this.setState({
-      actualTricks: this.state.actualTricks
+    this.setState((state) => ({
+      actualTricks: state.actualTricks
         .filter((trick) => trick.playerId !== playerId)
         .concat({
           playerId,
           value: event.target.value,
         }),
-    });
+    }));
   }
 
   async handleSave() {
@@ -99,8 +99,10 @@ export default class ActualTricksForm extends React.Component {
     return (
       <Box className="actual-tricks">
         <Typography gutterBottom variant="h4" component="h4">
-          Vul aantal behaalde slagen in per speler voor ronde:{" "}
-          {this.props.step.id}
+          {"Vul aantal behaalde slagen in per speler voor ronde: " +
+            this.props.step.id +
+            ", max: " +
+            this.props.step.nrOfCards}
         </Typography>
         <form>{tricks}</form>
         <Button variant="contained" onClick={this.handleSave}>

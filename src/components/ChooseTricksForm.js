@@ -18,7 +18,7 @@ export default class ChooseTricksForm extends React.Component {
   }
 
   handleChange(event, playerId) {
-    if (!this.chosenTricksValid(event.target.value, playerId)) {
+    if (!this.amountOfTricksValid(event.target.value, playerId)) {
       alert(
         "Totaal van gekozen slagen mag niet gelijk zijn aan aantal kaarten"
       );
@@ -38,8 +38,14 @@ export default class ChooseTricksForm extends React.Component {
     if (this.state.chosenTricks.length !== this.props.players.length) {
       alert("Nog niet alle spelers hebben hun slagen gekozen");
       return;
+    } else if (!this.amountOfTricksValid()) {
+      alert(
+        "Totaal van gekozen slagen mag niet gelijk zijn aan aantal kaarten"
+      );
+      return;
+    } else {
+      this.props.onSave(this.state.chosenTricks);
     }
-    this.props.onSave(this.state.chosenTricks);
   }
 
   getValue(player) {
@@ -49,18 +55,21 @@ export default class ChooseTricksForm extends React.Component {
     return trick ? trick.value : "";
   }
 
-  chosenTricksValid(value, playerId) {
-    const allOtherPlayersHaveChosen =
-      this.props.players.length === this.state.chosenTricks.length ||
-      this.props.players.length - 1 === this.state.chosenTricks.length;
-    if (playerId === this.props.step.dealerId && allOtherPlayersHaveChosen) {
-      const totalChosen = this.state.chosenTricks
-        .filter((trick) => trick.playerId !== playerId)
-        .map((trick) => trick.value)
-        .reduce((prev, cur) => prev + cur);
-      if (totalChosen + value === this.props.step.nrOfCards) {
-        return false;
-      }
+  amountOfTricksValid(value, playerId) {
+    const totalChosen = this.state.chosenTricks
+      .filter((trick) => trick.playerId !== playerId)
+      .map((trick) => trick.value)
+      .reduce((prev, cur) => prev + cur, 0);
+    const playersChosen = this.state.chosenTricks.filter(
+      (trick) => trick.playerId !== playerId
+    );
+
+    if (
+      (playersChosen.length === this.props.players.length - 1 ||
+        playersChosen.length === this.props.players.length) &&
+      totalChosen + value === this.props.step.nrOfCards
+    ) {
+      return false;
     }
     return true;
   }

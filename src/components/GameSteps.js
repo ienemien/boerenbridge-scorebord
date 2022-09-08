@@ -22,9 +22,9 @@ export default class GameSteps extends React.Component {
   }
 
   nextStep() {
-    this.setState({
-      currentStep: this.state.currentStep + 1,
-    });
+    this.setState((state) => ({
+      currentStep: state.currentStep + 1,
+    }));
   }
 
   savePlayers(players) {
@@ -32,7 +32,16 @@ export default class GameSteps extends React.Component {
       {
         players: players,
       },
-      () => this.setSteps(players.length)
+      () => this.setSteps()
+    );
+  }
+
+  setSteps() {
+    this.setState(
+      (state) => ({
+        steps: this.createSteps(state),
+      }),
+      () => this.nextStep()
     );
   }
 
@@ -86,8 +95,8 @@ export default class GameSteps extends React.Component {
     return prevScore ? prevScore.total + added : added;
   }
 
-  setSteps(nrOfPlayers) {
-    const cardsPerPlayer = Math.floor(52 / nrOfPlayers);
+  createSteps(state) {
+    const cardsPerPlayer = Math.floor(52 / state.players.length);
     const maxCards = cardsPerPlayer > 10 ? 10 : cardsPerPlayer;
     const steps = [];
     let id = 1;
@@ -96,33 +105,28 @@ export default class GameSteps extends React.Component {
       steps.push({
         id,
         nrOfCards: i,
-        dealerId: this.state.players[dealerIndex].id,
+        dealerId: state.players[dealerIndex].id,
         scores: [],
       });
       id++;
-      dealerIndex = this.getDealerIndex(dealerIndex);
+      dealerIndex = this.getDealerIndex(dealerIndex, state.players);
     }
     for (let i = 1; i <= maxCards; i++) {
       steps.push({
         id,
         nrOfCards: i,
-        dealerId: this.state.players[dealerIndex].id,
+        dealerId: state.players[dealerIndex].id,
         scores: [],
       });
       id++;
-      dealerIndex = this.getDealerIndex(dealerIndex);
+      dealerIndex = this.getDealerIndex(dealerIndex, state.players);
     }
 
-    this.setState(
-      {
-        steps,
-      },
-      () => this.nextStep()
-    );
+    return steps;
   }
 
-  getDealerIndex(dealerIndex) {
-    return dealerIndex + 1 < this.state.players.length ? dealerIndex + 1 : 0;
+  getDealerIndex(dealerIndex, players) {
+    return dealerIndex + 1 < players.length ? dealerIndex + 1 : 0;
   }
 
   renderStep() {
