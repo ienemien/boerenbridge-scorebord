@@ -21,6 +21,17 @@ export default class GameSteps extends React.Component {
     this.nextStep = this.nextStep.bind(this);
   }
 
+  componentDidMount() {
+    const state = window.localStorage.getItem("GAME_STATE");
+    if (state) {
+      this.setState(JSON.parse(state));
+    }
+  }
+
+  componentDidUpdate() {
+    window.localStorage.setItem("GAME_STATE", JSON.stringify(this.state));
+  }
+
   nextStep() {
     this.setState((state) => ({
       currentStep: state.currentStep + 1,
@@ -156,7 +167,7 @@ export default class GameSteps extends React.Component {
         return (
           <Scoreboard
             players={this.state.players}
-            scores={step.scores}
+            step={step}
             onClick={this.nextStep}
           ></Scoreboard>
         );

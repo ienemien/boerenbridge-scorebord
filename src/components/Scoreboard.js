@@ -6,10 +6,11 @@ import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
+import Typography from "@mui/material/Typography";
 import React from "react";
 
 export default function ScoreBoard(props) {
-  let scores = props.scores
+  let scores = props.step.scores
     .sort((scoreA, scoreB) => scoreB.total - scoreA.total)
     .map((score, index) => (
       <TableRow
@@ -41,6 +42,9 @@ export default function ScoreBoard(props) {
 
   return (
     <Box className="scoreboard">
+      <Typography gutterBottom variant="h4" component="h4">
+        {"Score ronde: " + props.step.id}
+      </Typography>
       <TableContainer>
         <Table
           sx={{ minWidth: 250 }}
