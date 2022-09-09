@@ -105,7 +105,7 @@ export default class ChooseTricksForm extends React.Component {
     return (
       <Box className="choose-tricks">
         <Typography gutterBottom variant="h4" component="h4">
-          {"Ronde: " + this.props.step.id}
+          {"Gekozen slagen voor ronde: " + this.props.step.id}
         </Typography>
         <Typography gutterBottom variant="h6" component="p">
           {"Kies aantal slagen per speler, aantal kaarten voor deze ronde: " +

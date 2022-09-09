@@ -74,9 +74,11 @@ export default function ScoreBoard(props) {
           <TableBody>{scores}</TableBody>
         </Table>
       </TableContainer>
-      <Button variant="contained" onClick={props.onClick}>
-        Volgende ronde
-      </Button>
+      {!props.lastStep && (
+        <Button variant="contained" onClick={props.onClick}>
+          Volgende ronde
+        </Button>
+      )}
     </Box>
   );
 }

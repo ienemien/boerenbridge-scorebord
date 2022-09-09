@@ -1,0 +1,535 @@
+{
+    "players": [
+        {
+            "id": 1,
+            "name": "Tom"
+        },
+        {
+            "id": 2,
+            "name": "Michiel"
+        },
+        {
+            "id": 3,
+            "name": "Justin"
+        }
+    ],
+    "steps": [
+        {
+            "id": 1,
+            "nrOfCards": 10,
+            "dealerId": 1,
+            "scores": [
+                {
+                    "playerId": 3,
+                    "chosenTricks": 4,
+                    "actualTricks": 4,
+                    "added": 9,
+                    "total": 9
+                },
+                {
+                    "playerId": 2,
+                    "chosenTricks": 1,
+                    "actualTricks": 5,
+                    "added": 5,
+                    "total": 5
+                },
+                {
+                    "playerId": 1,
+                    "chosenTricks": 2,
+                    "actualTricks": 1,
+                    "added": 1,
+                    "total": 1
+                }
+            ]
+        },
+        {
+            "id": 2,
+            "nrOfCards": 9,
+            "dealerId": 2,
+            "scores": [
+                {
+                    "playerId": 3,
+                    "chosenTricks": 5,
+                    "actualTricks": 4,
+                    "added": 4,
+                    "total": 13
+                },
+                {
+                    "playerId": 1,
+                    "chosenTricks": 2,
+                    "actualTricks": 2,
+                    "added": 7,
+                    "total": 8
+                },
+                {
+                    "playerId": 2,
+                    "chosenTricks": 1,
+                    "actualTricks": 3,
+                    "added": 3,
+                    "total": 8
+                }
+            ]
+        },
+        {
+            "id": 3,
+            "nrOfCards": 8,
+            "dealerId": 3,
+            "scores": [
+                {
+                    "playerId": 3,
+                    "chosenTricks": 3,
+                    "actualTricks": 5,
+                    "added": 5,
+                    "total": 18
+                },
+                {
+                    "playerId": 1,
+                    "chosenTricks": 1,
+                    "actualTricks": 2,
+                    "added": 2,
+                    "total": 10
+                },
+                {
+                    "playerId": 2,
+                    "chosenTricks": 5,
+                    "actualTricks": 1,
+                    "added": 1,
+                    "total": 9
+                }
+            ]
+        },
+        {
+            "id": 4,
+            "nrOfCards": 7,
+            "dealerId": 1,
+            "scores": [
+                {
+                    "playerId": 3,
+                    "chosenTricks": 4,
+                    "actualTricks": 2,
+                    "added": 2,
+                    "total": 20
+                },
+                {
+                    "playerId": 1,
+                    "chosenTricks": 2,
+                    "actualTricks": 3,
+                    "added": 3,
+                    "total": 13
+                },
+                {
+                    "playerId": 2,
+                    "chosenTricks": 4,
+                    "actualTricks": 2,
+                    "added": 2,
+                    "total": 11
+                }
+            ]
+        },
+        {
+            "id": 5,
+            "nrOfCards": 6,
+            "dealerId": 2,
+            "scores": [
+                {
+                    "playerId": 3,
+                    "chosenTricks": 4,
+                    "actualTricks": 2,
+                    "added": 2,
+                    "total": 22
+                },
+                {
+                    "playerId": 1,
+                    "chosenTricks": 3,
+                    "actualTricks": 2,
+                    "added": 2,
+                    "total": 15
+                },
+                {
+                    "playerId": 2,
+                    "chosenTricks": 1,
+                    "actualTricks": 2,
+                    "added": 2,
+                    "total": 13
+                }
+            ]
+        },
+        {
+            "id": 6,
+            "nrOfCards": 5,
+            "dealerId": 3,
+            "scores": [
+                {
+                    "playerId": 1,
+                    "chosenTricks": 2,
+                    "actualTricks": 2,
+                    "added": 7,
+                    "total": 22
+                },
+                {
+                    "playerId": 3,
+                    "chosenTricks": 3,
+                    "actualTricks": 0,
+                    "added": 0,
+                    "total": 22
+                },
+                {
+                    "playerId": 2,
+                    "chosenTricks": 2,
+                    "actualTricks": 3,
+                    "added": 3,
+                    "total": 16
+                }
+            ]
+        },
+        {
+            "id": 7,
+            "nrOfCards": 4,
+            "dealerId": 1,
+            "scores": [
+                {
+                    "playerId": 3,
+                    "chosenTricks": 1,
+                    "actualTricks": 2,
+                    "added": 2,
+                    "total": 24
+                },
+                {
+                    "playerId": 1,
+                    "chosenTricks": 3,
+                    "actualTricks": 1,
+                    "added": 1,
+                    "total": 23
+                },
+                {
+                    "playerId": 2,
+                    "chosenTricks": 4,
+                    "actualTricks": 1,
+                    "added": 1,
+                    "total": 17
+                }
+            ]
+        },
+        {
+            "id": 8,
+            "nrOfCards": 3,
+            "dealerId": 2,
+            "scores": [
+                {
+                    "playerId": 1,
+                    "chosenTricks": 2,
+                    "actualTricks": 2,
+                    "added": 7,
+                    "total": 30
+                },
+                {
+                    "playerId": 3,
+                    "chosenTricks": 2,
+                    "actualTricks": 0,
+                    "added": 0,
+                    "total": 24
+                },
+                {
+                    "playerId": 2,
+                    "chosenTricks": 0,
+                    "actualTricks": 1,
+                    "added": 1,
+                    "total": 18
+                }
+            ]
+        },
+        {
+            "id": 9,
+            "nrOfCards": 2,
+            "dealerId": 3,
+            "scores": [
+                {
+                    "playerId": 1,
+                    "chosenTricks": 2,
+                    "actualTricks": 1,
+                    "added": 1,
+                    "total": 31
+                },
+                {
+                    "playerId": 3,
+                    "chosenTricks": 1,
+                    "actualTricks": 1,
+                    "added": 6,
+                    "total": 30
+                },
+                {
+                    "playerId": 2,
+                    "chosenTricks": 1,
+                    "actualTricks": 0,
+                    "added": 0,
+                    "total": 18
+                }
+            ]
+        },
+        {
+            "id": 10,
+            "nrOfCards": 1,
+            "dealerId": 1,
+            "scores": [
+                {
+                    "playerId": 1,
+                    "chosenTricks": 0,
+                    "actualTricks": 0,
+                    "added": 5,
+                    "total": 36
+                },
+                {
+                    "playerId": 3,
+                    "chosenTricks": 1,
+                    "actualTricks": 0,
+                    "added": 0,
+                    "total": 30
+                },
+                {
+                    "playerId": 2,
+                    "chosenTricks": 1,
+                    "actualTricks": 1,
+                    "added": 6,
+                    "total": 24
+                }
+            ]
+        },
+        {
+            "id": 11,
+            "nrOfCards": 1,
+            "dealerId": 2,
+            "scores": [
+                {
+                    "playerId": 1,
+                    "chosenTricks": 1,
+                    "actualTricks": 1,
+                    "added": 6,
+                    "total": 42
+                },
+                {
+                    "playerId": 3,
+                    "chosenTricks": 1,
+                    "actualTricks": 0,
+                    "added": 0,
+                    "total": 30
+                },
+                {
+                    "playerId": 2,
+                    "chosenTricks": 0,
+                    "actualTricks": 0,
+                    "added": 5,
+                    "total": 29
+                }
+            ]
+        },
+        {
+            "id": 12,
+            "nrOfCards": 2,
+            "dealerId": 3,
+            "scores": [
+                {
+                    "playerId": 1,
+                    "chosenTricks": 1,
+                    "actualTricks": 1,
+                    "added": 6,
+                    "total": 48
+                },
+                {
+                    "playerId": 2,
+                    "chosenTricks": 0,
+                    "actualTricks": 1,
+                    "added": 1,
+                    "total": 30
+                },
+                {
+                    "playerId": 3,
+                    "chosenTricks": 2,
+                    "actualTricks": 0,
+                    "added": 0,
+                    "total": 30
+                }
+            ]
+        },
+        {
+            "id": 13,
+            "nrOfCards": 3,
+            "dealerId": 1,
+            "scores": [
+                {
+                    "playerId": 1,
+                    "chosenTricks": 2,
+                    "actualTricks": 0,
+                    "added": 0,
+                    "total": 48
+                },
+                {
+                    "playerId": 2,
+                    "chosenTricks": 1,
+                    "actualTricks": 1,
+                    "added": 6,
+                    "total": 36
+                },
+                {
+                    "playerId": 3,
+                    "chosenTricks": 3,
+                    "actualTricks": 2,
+                    "added": 2,
+                    "total": 32
+                }
+            ]
+        },
+        {
+            "id": 14,
+            "nrOfCards": 4,
+            "dealerId": 2,
+            "scores": [
+                {
+                    "playerId": 1,
+                    "chosenTricks": 2,
+                    "actualTricks": 0,
+                    "added": 0,
+                    "total": 48
+                },
+                {
+                    "playerId": 2,
+                    "chosenTricks": 1,
+                    "actualTricks": 2,
+                    "added": 2,
+                    "total": 38
+                },
+                {
+                    "playerId": 3,
+                    "chosenTricks": 3,
+                    "actualTricks": 2,
+                    "added": 2,
+                    "total": 34
+                }
+            ]
+        },
+        {
+            "id": 15,
+            "nrOfCards": 5,
+            "dealerId": 3,
+            "scores": [
+                {
+                    "playerId": 1,
+                    "chosenTricks": 3,
+                    "actualTricks": 2,
+                    "added": 2,
+                    "total": 50
+                },
+                {
+                    "playerId": 2,
+                    "chosenTricks": 2,
+                    "actualTricks": 2,
+                    "added": 7,
+                    "total": 45
+                },
+                {
+                    "playerId": 3,
+                    "chosenTricks": 1,
+                    "actualTricks": 1,
+                    "added": 6,
+                    "total": 40
+                }
+            ]
+        },
+        {
+            "id": 16,
+            "nrOfCards": 6,
+            "dealerId": 1,
+            "scores": [
+                {
+                    "playerId": 1,
+                    "chosenTricks": 2,
+                    "actualTricks": 2,
+                    "added": 7,
+                    "total": 57
+                },
+                {
+                    "playerId": 2,
+                    "chosenTricks": 3,
+                    "actualTricks": 2,
+                    "added": 2,
+                    "total": 47
+                },
+                {
+                    "playerId": 3,
+                    "chosenTricks": 2,
+                    "actualTricks": 2,
+                    "added": 7,
+                    "total": 47
+                }
+            ]
+        },
+        {
+            "id": 17,
+            "nrOfCards": 7,
+            "dealerId": 2,
+            "scores": [
+                {
+                    "playerId": 1,
+                    "chosenTricks": 4,
+                    "actualTricks": 1,
+                    "added": 1,
+                    "total": 58
+                },
+                {
+                    "playerId": 2,
+                    "chosenTricks": 2,
+                    "actualTricks": 3,
+                    "added": 3,
+                    "total": 50
+                },
+                {
+                    "playerId": 3,
+                    "chosenTricks": 2,
+                    "actualTricks": 3,
+                    "added": 3,
+                    "total": 50
+                }
+            ]
+        },
+        {
+            "id": 18,
+            "nrOfCards": 8,
+            "dealerId": 3,
+            "scores": [
+                {
+                    "playerId": 1,
+                    "chosenTricks": 2,
+                    "actualTricks": 1,
+                    "added": 1,
+                    "total": 59
+                },
+                {
+                    "playerId": 3,
+                    "chosenTricks": 3,
+                    "actualTricks": 3,
+                    "added": 8,
+                    "total": 58
+                },
+                {
+                    "playerId": 2,
+                    "chosenTricks": 1,
+                    "actualTricks": 4,
+                    "added": 4,
+                    "total": 54
+                }
+            ]
+        },
+        {
+            "id": 19,
+            "nrOfCards": 9,
+            "dealerId": 1,
+            "scores": []
+        },
+        {
+            "id": 20,
+            "nrOfCards": 10,
+            "dealerId": 2,
+            "scores": []
+        }
+    ],
+    "currentStep": 19
+}

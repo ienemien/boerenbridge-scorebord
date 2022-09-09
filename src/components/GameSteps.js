@@ -181,6 +181,7 @@ export default class GameSteps extends React.Component {
           <Scoreboard
             players={this.state.players}
             step={step}
+            lastStep={step.id === this.state.steps.length}
             onClick={this.nextStep}
           ></Scoreboard>
         );
