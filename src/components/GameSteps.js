@@ -1,6 +1,9 @@
+import ReplayIcon from "@mui/icons-material/Replay";
+import Button from "@mui/material/Button";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Grid from "@mui/material/Grid";
+import Typography from "@mui/material/Typography";
 import React from "react";
 import ActualTricksForm from "./ActualTricksForm";
 import ChooseTricksForm from "./ChooseTricksForm";
@@ -19,6 +22,7 @@ export default class GameSteps extends React.Component {
     this.saveChosenTricks = this.saveChosenTricks.bind(this);
     this.saveScore = this.saveScore.bind(this);
     this.nextStep = this.nextStep.bind(this);
+    this.startNew = this.startNew.bind(this);
   }
 
   componentDidMount() {
@@ -30,6 +34,15 @@ export default class GameSteps extends React.Component {
 
   componentDidUpdate() {
     window.localStorage.setItem("GAME_STATE", JSON.stringify(this.state));
+  }
+
+  startNew() {
+    window.localStorage.removeItem("GAME_STATE");
+    this.setState({
+      players: [],
+      steps: [],
+      currentStep: 0,
+    });
   }
 
   nextStep() {
@@ -186,10 +199,28 @@ export default class GameSteps extends React.Component {
   render() {
     const step = this.renderStep();
     return (
-      <Grid item xs={12}>
-        <Card>
-          <CardContent>{step}</CardContent>
-        </Card>
+      <Grid container spacing={5}>
+        <Grid item xs={9}>
+          <Typography variant="h3" component="h3" gutterBottom>
+            Boerenbridge Scorebord
+          </Typography>
+        </Grid>
+        <Grid item xs={3}>
+          <Button
+            variant="outlined"
+            color="secondary"
+            size="small"
+            endIcon={<ReplayIcon />}
+            onClick={this.startNew}
+          >
+            Begin opnieuw
+          </Button>
+        </Grid>
+        <Grid item xs={12}>
+          <Card>
+            <CardContent>{step}</CardContent>
+          </Card>
+        </Grid>
       </Grid>
     );
   }
