@@ -1,12 +1,15 @@
+import StyleIcon from "@mui/icons-material/Style";
+import Avatar from "@mui/material/Avatar";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
+import CardContent from "@mui/material/CardContent";
+import CardHeader from "@mui/material/CardHeader";
 import FormControl from "@mui/material/FormControl";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
 import Typography from "@mui/material/Typography";
 import React from "react";
-import StyleIcon from "@mui/icons-material/Style";
 
 export default class ChooseTricksForm extends React.Component {
   constructor(props) {
@@ -79,7 +82,7 @@ export default class ChooseTricksForm extends React.Component {
 
     for (let i = 0; i <= this.props.step.nrOfCards; i++) {
       selectOptions.push(
-        <MenuItem value={i} key={i}>
+        <MenuItem value={i} key={i} dense>
           {i}
         </MenuItem>
       );
@@ -103,19 +106,27 @@ export default class ChooseTricksForm extends React.Component {
       </FormControl>
     ));
     return (
-      <Box className="choose-tricks">
-        <Typography gutterBottom variant="h4" component="h4">
-          {"Gekozen slagen voor ronde: " + this.props.step.id}
-        </Typography>
-        <Typography gutterBottom variant="h6" component="p">
-          {"Kies aantal slagen per speler, aantal kaarten voor deze ronde: " +
-            this.props.step.nrOfCards}
-        </Typography>
-        <form>{tricks}</form>
-        <Button variant="contained" onClick={this.handleSave}>
-          Start ronde
-        </Button>
-      </Box>
+      <>
+        <CardHeader
+          avatar={
+            <Avatar sx={{ color: "#FFFFFF" }}>{this.props.step.id}</Avatar>
+          }
+          title={<Typography variant="h5">Kies aantal slagen</Typography>}
+          subheader={
+            <Typography variant="h6">
+              Aantal kaarten: {this.props.step.nrOfCards}
+            </Typography>
+          }
+        />
+        <CardContent>
+          <Box className="choose-tricks">
+            <form>{tricks}</form>
+            <Button variant="contained" onClick={this.handleSave}>
+              Start ronde
+            </Button>
+          </Box>
+        </CardContent>
+      </>
     );
   }
 }

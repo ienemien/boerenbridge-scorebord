@@ -50,8 +50,8 @@ export default class PlayerForm extends React.Component {
     if (this.state.newPlayer.length > 0) {
       currentPlayers.push(this.createNewPlayer());
     }
-    if (currentPlayers.length < 3) {
-      alert("Voeg ten minste 3 spelers toe");
+    if (currentPlayers.length < 2) {
+      alert("Voeg ten minste 2 spelers toe");
     } else if (currentPlayers.length > 8) {
       alert("Te veel spelers, voeg maximaal 8 spelers toe");
     } else {
@@ -78,7 +78,7 @@ export default class PlayerForm extends React.Component {
           Spelers
         </Typography>
         <Typography gutterBottom component="p">
-          Voeg minimaal 3 en maximaal 8 spelers toe.
+          Voeg minimaal 2 en maximaal 8 spelers toe.
         </Typography>
         <ol>{players}</ol>
         <form className="player-form">

@@ -1,7 +1,6 @@
 import ReplayIcon from "@mui/icons-material/Replay";
 import Button from "@mui/material/Button";
 import Card from "@mui/material/Card";
-import CardContent from "@mui/material/CardContent";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import React from "react";
@@ -200,8 +199,8 @@ export default class GameSteps extends React.Component {
   render() {
     const step = this.renderStep();
     return (
-      <Grid container spacing={5}>
-        <Grid item xs={9}>
+      <Grid container justifyContent="center" spacing={5}>
+        <Grid item xs={12} md={6}>
           <Typography variant="h3" component="h3" gutterBottom>
             Boerenbridge Scorebord
           </Typography>
@@ -217,10 +216,8 @@ export default class GameSteps extends React.Component {
             Begin opnieuw
           </Button>
         </Grid>
-        <Grid item xs={12}>
-          <Card>
-            <CardContent>{step}</CardContent>
-          </Card>
+        <Grid item xs={12} md={6}>
+          <Card>{step}</Card>
         </Grid>
       </Grid>
     );

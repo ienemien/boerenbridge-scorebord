@@ -1,6 +1,9 @@
 import StyleIcon from "@mui/icons-material/Style";
+import { CardContent } from "@mui/material";
+import Avatar from "@mui/material/Avatar";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
+import CardHeader from "@mui/material/CardHeader";
 import FormControl from "@mui/material/FormControl";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
@@ -73,7 +76,7 @@ export default class ActualTricksForm extends React.Component {
 
     for (let i = 0; i <= this.props.step.nrOfCards; i++) {
       selectOptions.push(
-        <MenuItem value={i} key={i}>
+        <MenuItem value={i} key={i} dense={true}>
           {i}
         </MenuItem>
       );
@@ -82,8 +85,12 @@ export default class ActualTricksForm extends React.Component {
     const tricks = this.props.players.map((player) => (
       <FormControl fullWidth key={player.id}>
         <InputLabel id={"actual-tricks-label-" + player.id}>
-          {player.name}{" "}
-          {player.id === this.props.step.dealerId && <StyleIcon></StyleIcon>}
+          {player.name} (gekozen:{" "}
+          {
+            this.props.step.scores.find((score) => score.playerId === player.id)
+              .chosenTricks
+          }
+          ){player.id === this.props.step.dealerId && <StyleIcon></StyleIcon>}
         </InputLabel>
         <Select
           labelId={"actual-tricks-label-" + player.id}
@@ -97,19 +104,28 @@ export default class ActualTricksForm extends React.Component {
       </FormControl>
     ));
     return (
-      <Box className="actual-tricks">
-        <Typography gutterBottom variant="h4" component="h4">
-          {"Behaalde slagen voor ronde: " + this.props.step.id}
-        </Typography>
-        <Typography gutterBottom variant="h6" component="p">
-          {"Vul aantal behaalde slagen in per speler, max: " +
-            this.props.step.nrOfCards}
-        </Typography>
-        <form>{tricks}</form>
-        <Button variant="contained" onClick={this.handleSave}>
-          Bekijk tussenstand
-        </Button>
-      </Box>
+      <>
+        <CardHeader
+          avatar={
+            <Avatar sx={{ color: "#FFFFFF" }}>{this.props.step.id}</Avatar>
+          }
+          disableTypography
+          title={<Typography variant="h5">Behaalde slagen</Typography>}
+          subheader={
+            <Typography variant="h6">
+              Aantal kaarten: {this.props.step.nrOfCards}
+            </Typography>
+          }
+        />
+        <CardContent>
+          <Box className="actual-tricks">
+            <form>{tricks}</form>
+            <Button variant="contained" onClick={this.handleSave}>
+              Bekijk tussenstand
+            </Button>
+          </Box>
+        </CardContent>
+      </>
     );
   }
 }
