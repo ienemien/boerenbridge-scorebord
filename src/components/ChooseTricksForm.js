@@ -1,3 +1,4 @@
+import QuizIcon from "@mui/icons-material/Quiz";
 import StyleIcon from "@mui/icons-material/Style";
 import Avatar from "@mui/material/Avatar";
 import Box from "@mui/material/Box";
@@ -10,6 +11,7 @@ import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
 import Typography from "@mui/material/Typography";
 import React from "react";
+import { grey } from "@mui/material/colors";
 
 export default class ChooseTricksForm extends React.Component {
   constructor(props) {
@@ -109,7 +111,9 @@ export default class ChooseTricksForm extends React.Component {
       <>
         <CardHeader
           avatar={
-            <Avatar sx={{ color: "#FFFFFF" }}>{this.props.step.id}</Avatar>
+            <Avatar sx={{ bgcolor: grey[500] }}>
+              <QuizIcon />
+            </Avatar>
           }
           title={<Typography variant="h5">Kies aantal slagen</Typography>}
           subheader={

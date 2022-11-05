@@ -10,6 +10,8 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import React from "react";
+import SportsScoreIcon from "@mui/icons-material/SportsScore";
+import { blue } from "@mui/material/colors";
 
 export default function ScoreBoard(props) {
   let scores = props.step.scores
@@ -45,7 +47,11 @@ export default function ScoreBoard(props) {
   return (
     <>
       <CardHeader
-        avatar={<Avatar sx={{ color: "#FFFFFF" }}>{props.step.id}</Avatar>}
+        avatar={
+          <Avatar sx={{ bgcolor: blue[500] }}>
+            <SportsScoreIcon />
+          </Avatar>
+        }
         title="Scorebord"
       />
       <CardContent>

@@ -1,9 +1,11 @@
+import DoneIcon from "@mui/icons-material/Done";
 import StyleIcon from "@mui/icons-material/Style";
 import { CardContent } from "@mui/material";
 import Avatar from "@mui/material/Avatar";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import CardHeader from "@mui/material/CardHeader";
+import { green } from "@mui/material/colors";
 import FormControl from "@mui/material/FormControl";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
@@ -85,12 +87,13 @@ export default class ActualTricksForm extends React.Component {
     const tricks = this.props.players.map((player) => (
       <FormControl fullWidth key={player.id}>
         <InputLabel id={"actual-tricks-label-" + player.id}>
+          {player.id === this.props.step.dealerId && <StyleIcon></StyleIcon>}{" "}
           {player.name} (gekozen:{" "}
           {
             this.props.step.scores.find((score) => score.playerId === player.id)
               .chosenTricks
           }
-          ){player.id === this.props.step.dealerId && <StyleIcon></StyleIcon>}
+          )
         </InputLabel>
         <Select
           labelId={"actual-tricks-label-" + player.id}
@@ -107,7 +110,9 @@ export default class ActualTricksForm extends React.Component {
       <>
         <CardHeader
           avatar={
-            <Avatar sx={{ color: "#FFFFFF" }}>{this.props.step.id}</Avatar>
+            <Avatar sx={{ bgcolor: green[500] }}>
+              <DoneIcon />
+            </Avatar>
           }
           disableTypography
           title={<Typography variant="h5">Behaalde slagen</Typography>}
