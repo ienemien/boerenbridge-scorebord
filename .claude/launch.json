@@ -1,0 +1,38 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "boerenbridge",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["start"],
+      "port": 3000
+    },
+    {
+      "name": "boerenbridge-v2",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": [
+        "--prefix",
+        "C:\\projects\\boerenbridge-scorebord-v2",
+        "run",
+        "start",
+        "--",
+        "--host",
+        "0.0.0.0"
+      ],
+      "port": 4200
+    },
+    {
+      "name": "boerenbridge-v2-pwa",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": [
+        "http-server",
+        "C:\\projects\\boerenbridge-scorebord-v2\\dist\\boerenbridge-scorebord-v2\\browser",
+        "-p",
+        "4300",
+        "-a",
+        "0.0.0.0"
+      ],
+      "port": 4300
+    }
+  ]
+}
